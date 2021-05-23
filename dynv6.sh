@@ -69,6 +69,7 @@ fi;
 
 ipv6prefix="${full_parts_prefix}:${prefix_chars}$(printf "%0${id_char_count}d" 0)::"
 ipv6=$(ip -6 addr show dev $iface scope global | awk '/inet6/{print $2}' | cut -d '/' -f 1)
+ipv4=$(ip -4 addr show dev $iface scope global | awk '/inet/{print $2}' | cut -d '/' -f 1)
 
 #update Data
 curl -G -s -o /dev/null \
@@ -76,4 +77,5 @@ curl -G -s -o /dev/null \
   --data "zone=${zone}" \
   --data "ipv6=${ipv6}" \
   --data "ipv6prefix=${ipv6prefix}" \
+  --data "ipv4=${ipv4}" \
   "${base_url}" 
