@@ -1,0 +1,13 @@
+= Update Script for DynV6 on EdgeOS
+
+This script updates IPv6 Address and Prefix of a link:https://dynv6.com[dynv6] zone to the ones configured.
+
+It can handle the interface as first argument. If none is given, it will take the first interface configured for dyndns.
+Access token and zone are taken from the first dyndns service of that first dyndns interface.
+It gets the IP from the interface and calculates the subnet from the first interface configured for PD.
+
+== Installation
+
+. Download dynv6.sh to /config/scripts on the router.
+. Set options of the dyndns config to postscript=/config/scripts/dynv6.sh .
+
