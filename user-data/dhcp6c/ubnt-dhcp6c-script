@@ -1,0 +1,8 @@
+#!/bin/bash
+
+/opt/vyatta/sbin/dhcpv6-pd-response.pl
+
+run-parts --report --regex '^[a-zA-Z0-9._-]+$' /config/user-data/dhcp6c/reply.d
+
+exit 0
+

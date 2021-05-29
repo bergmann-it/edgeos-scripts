@@ -1,3 +1,5 @@
+
+
 = Update Script for DynV6 on EdgeOS
 
 This script updates IPv6 Address and Prefix of a link:https://dynv6.com[dynv6] zone to the ones configured.
@@ -8,6 +10,19 @@ It gets the IP from the interface and calculates the subnet from the first inter
 
 == Installation
 
-. Download dynv6.sh to /config/scripts on the router.
-. Set options of the dyndns config to postscript=/config/scripts/dynv6.sh .
-
+. Download contents of user-data Folder to /config/user-data on the router.
+. set the folowing config replacing the hostname and secret.
+```
+set service dns dynamic interface pppoe0 service custom-00global host-name ' '
+set service dns dynamic interface pppoe0 service custom-00global login none
+set service dns dynamic interface pppoe0 service custom-00global options postscript=/config/user-data/ddclient/dynv6.sh
+set service dns dynamic interface pppoe0 service custom-00global password none
+set service dns dynamic interface pppoe0 service custom-00global protocol dyndns2
+set service dns dynamic interface pppoe0 service custom-dynv6 host-name home.example.com
+set service dns dynamic interface pppoe0 service custom-dynv6 login none
+set service dns dynamic interface pppoe0 service custom-dynv6 password secret
+set service dns dynamic interface pppoe0 service custom-dynv6 protocol dyndns2
+set service dns dynamic interface pppoe0 service custom-dynv6 server dynv6.com
+set service dns dynamic interface pppoe0 web dyndns
+```
+. If you also want to configure NAT-PT as described in link:https://doku.bergmann.click/it/ipv6.html[my documentation] you can also copy over the contents of the scripts folder.
